@@ -1,5 +1,5 @@
 # Importando las clases de Flask
-from flask import Flask, request, make_response, redirect
+from flask import Flask, request, make_response, redirect, render_template
 
 app = Flask(__name__) 
 # Declarando una nueva variable instanciandola con Flask
@@ -18,4 +18,4 @@ def index():
 def hello():
     user_ip = request.cookies.get('user_ip') # request de cookies
     
-    return "Hello World Junior, tu IP es {}".format(user_ip)
+    return render_template('hello.html',user_ip=user_ip)
