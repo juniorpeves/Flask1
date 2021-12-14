@@ -5,10 +5,14 @@
         <title>
             {% block title %} Flask Junior | {% endblock %}
         </title>
+        <link rel="stylesheet" href="{{url_for('static',filename="css/main.css")}}">
     </head>
     <body>
+        <header>
+            {% include 'navbar.html' %}
+        </header>
         {% block content%}
-        
+
         {% endblock content%}
     </body>
 </html>
