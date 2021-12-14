@@ -5,6 +5,15 @@ from flask import Flask, request, make_response, redirect, render_template
 # Con el parametro de la aplicación
 app = Flask(__name__) 
 
+@app.errorhandler(404)
+def not_found(error): 
+      return render_template('error_404.html', error=error)
+  
+@app.errorhandler(500)
+def not_found(error): 
+      return render_template('error_500.html', error=error)
+  
+
 @app.route('/')
 def index():
     user_ip = request.remote_addr # request de ip
@@ -26,3 +35,4 @@ def hello():
     }
     # Se envia un diccionario expandido con el **
     return render_template('hello.html', **context)
+
