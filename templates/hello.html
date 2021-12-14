@@ -1,5 +1,27 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macros %}
+
+{% block title%} 
+    {{super()}} Bienvenido
+{% endblock title%}
+
+{% block content%}
+<!--
+    Agregando una estructura de control, usando el condicional if
+-->
 {% if user_ip %}
     <h1> Hello World Junior, tu IP es {{user_ip}} </h1>
 {% else %}
+<!--
+    *url_for* Encontrando la ruta especifica con el nombre de la funcioón *index*
+-->
     <a href="{{url_for('index')}}"> Go to index </a>
 {% endif %}
+
+<ul>
+    {% for i in todos %}
+        {{ macros.render_list(i)}}
+    {% endfor %}
+</ul>
+
+{% endblock content%}

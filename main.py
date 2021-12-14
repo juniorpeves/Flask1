@@ -1,9 +1,9 @@
 # Importando las clases de Flask
 from flask import Flask, request, make_response, redirect, render_template
 
-app = Flask(__name__) 
 # Declarando una nueva variable instanciandola con Flask
 # Con el parametro de la aplicación
+app = Flask(__name__) 
 
 @app.route('/')
 def index():
@@ -14,8 +14,15 @@ def index():
     
     return response
 
+todos = ['Junior', 'Calo', 'Toño']
+
 @app.route('/hello') # Usando el decorador con la función 00route 
 def hello():
     user_ip = request.cookies.get('user_ip') # request de cookies
-    
-    return render_template('hello.html',user_ip=user_ip)
+    # Creando un diccionario para pasarlo como contexto de varias variables
+    context = {
+        'user_ip': user_ip,
+        'todos': todos
+    }
+    # Se envia un diccionario expandido con el **
+    return render_template('hello.html', **context)
