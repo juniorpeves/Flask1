@@ -1,9 +1,11 @@
 # Importando las clases de Flask
 from flask import Flask, request, make_response, redirect, render_template
+from flask_bootstrap import Bootstrap
 
 # Declarando una nueva variable instanciandola con Flask
 # Con el parametro de la aplicación
 app = Flask(__name__) 
+bootstrap = Bootstrap(app)
 
 @app.errorhandler(404)
 def not_found(error): 
@@ -36,3 +38,6 @@ def hello():
     # Se envia un diccionario expandido con el **
     return render_template('hello.html', **context)
 
+@app.route('/xxx') # Usando el decorador con la función 00route 
+def xxx():
+    return render_template('xxx.html')
