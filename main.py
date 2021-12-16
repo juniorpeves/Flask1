@@ -1,5 +1,5 @@
 # Importando las clases de Flask
-from flask import Flask, request, make_response, redirect, render_template, session
+from flask import Flask, request, make_response, redirect, render_template, session, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
@@ -15,7 +15,7 @@ app.config['SECRET_KEY']='Super secreto'
 
 class LoginForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 
@@ -37,18 +37,31 @@ def index():
     # response.set_cookie('user_ip', user_ip) # Guardando la ip en una cookie
     return response
 
-@app.route('/hello') # Usando el decorador con la función 00route 
+@app.route('/hello', methods=['GET', 'POST']) # Usando el decorador con la función route 
 def hello():
     user_ip = session.get('user_ip') # request de cookies
-    # Creando un diccionario para pasarlo como contexto de varias variables
     login_form = LoginForm()
+    username = session.get('username') # 04 Obteninedo el username desde session
+    
+    # Creando un diccionario para pasarlo como contexto de varias variables
     context = {
         'user_ip': user_ip,
         'todos': todos,
-        'login_form': login_form
+        'login_form': login_form,
+        'username': username # 05 Agregandolo al contexto
     }
-    # Se envia un diccionario expandido con el **
+    # POST, Si la forma es valida hacemos un redirect
+    # 01 Validate_on_submit detecta si la forma es valida en un post
+    if login_form.validate_on_submit():
+        username = login_form.username.data # 02 Obteninedo el username
+        session['username'] = username # 03 Guardandolo en session
+        
+        return redirect(url_for('index'))       
+
+    # GET Se envia un diccionario expandido con el **
     return render_template('hello.html', **context)
+
+
 
 @app.route('/xxx') # Usando el decorador con la función 00route 
 def xxx():

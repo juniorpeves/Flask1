@@ -7,17 +7,20 @@
 {% endblock title%}
 
 {% block content%}
-<!--
-    Agregando una estructura de control, usando el condicional if
--->
-{% if user_ip %}
-    <h1> Hello World Junior, tu IP es {{user_ip}} </h1>
-{% else %}
+    {% if username %}
+        <!-- Devolviendo el username -->
+        <h1> Welcome, {{username | capitalize}} </h1>
+    {% endif %}
+
+<!-- Agregando una estructura de control, usando el condicional if -->
+    {% if user_ip %}
+        <h3> Tu IP es {{user_ip}} </h3>
+    {% else %}
 <!--
     *url_for* Encontrando la ruta especifica con el nombre de la funcioón *index*
 -->
     <a href="{{url_for('index')}}"> Go to index </a>
-{% endif %}
+    {% endif %}
     <div class="container">
     <!--<form action="{{url_for('hello')}}" method="POST">
             {{ login_form.username.label }}
