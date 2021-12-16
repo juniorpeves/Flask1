@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block title%} 
     {{super()}} Bienvenido
@@ -17,6 +18,13 @@
 -->
     <a href="{{url_for('index')}}"> Go to index </a>
 {% endif %}
+    <div class="container">
+    <!--<form action="{{url_for('hello')}}" method="POST">
+            {{ login_form.username.label }}
+            {{ login_form.username }}
+        </form>-->
+    {{ wtf.quick_form(login_form) }}
+    </div>
 
 <ul>
     {% for i in todos %}
