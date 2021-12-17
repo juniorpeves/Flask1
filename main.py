@@ -1,10 +1,10 @@
 # Importando las clases de Flask
-from flask import Flask, request, make_response, redirect, render_template, session, url_for
+from flask import Flask, request, make_response, redirect, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
 from wtforms.fields.simple import SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 # Declarando una nueva variable instanciandola con Flask
 # Con el parametro de la aplicación
 app = Flask(__name__) 
@@ -14,11 +14,10 @@ todos = ['Junior', 'Calo', 'Toño']
 app.config['SECRET_KEY']='Super secreto'
 
 class LoginForm(FlaskForm):
-    username = StringField('Nombre de usuario', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('Nombre de usuario', validators=[DataRequired(), Length(max=20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
     submit = SubmitField('Enviar')
-
-
+    
 @app.errorhandler(404)
 def not_found(error): 
       return render_template('error_404.html', error=error)
@@ -56,12 +55,12 @@ def hello():
         username = login_form.username.data # 02 Obteninedo el username
         session['username'] = username # 03 Guardandolo en session
         
-        return redirect(url_for('index'))       
-
-    # GET Se envia un diccionario expandido con el **
+        flash('Success')
+        return redirect(url_for('index'))
+    
     return render_template('hello.html', **context)
-
-
+    # GET Se envia un diccionario expandido con el **
+    
 
 @app.route('/xxx') # Usando el decorador con la función 00route 
 def xxx():
