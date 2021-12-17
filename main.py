@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
 from wtforms.fields.simple import SubmitField
 from wtforms.validators import DataRequired, Length
+import unittest
 # Declarando una nueva variable instanciandola con Flask
 # Con el parametro de la aplicación
 app = Flask(__name__) 
@@ -17,6 +18,11 @@ class LoginForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired(), Length(max=20)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
     submit = SubmitField('Enviar')
+
+@app.cli.command()
+def test():
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
     
 @app.errorhandler(404)
 def not_found(error): 
@@ -25,7 +31,6 @@ def not_found(error):
 @app.errorhandler(500)
 def not_found(error): 
       return render_template('error_500.html', error=error)
-  
 
 @app.route('/')
 def index():
@@ -61,7 +66,6 @@ def hello():
     return render_template('hello.html', **context)
     # GET Se envia un diccionario expandido con el **
     
-
 @app.route('/xxx') # Usando el decorador con la función 00route 
 def xxx():
     return render_template('xxx.html')
