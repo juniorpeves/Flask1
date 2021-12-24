@@ -1,4 +1,5 @@
 # Importando las clases de Flask
+import os
 from flask import request, make_response, redirect, render_template, session, url_for, flash
 # from wtforms.fields.simple import SubmitField
 import unittest
@@ -36,7 +37,7 @@ def index():
     # response.set_cookie('user_ip', user_ip) # Guardando la ip en una cookie
     return response
 
-@app.route('/hello', methods=['GET']) # Usando el decorador con la función route 
+@app.route('/hello', methods=['GET','POST']) # Usando el decorador con la función route 
 def hello():
     user_ip = session.get('user_ip') # request de cookies
     login_form = LoginForm()
@@ -65,7 +66,6 @@ def hello():
 def xxx():
     return render_template('xxx.html')
 
-app.route('/favicon.ico')
+app.route('/favicon.ico', methods=['GET','POST'])
 def favicon():
-    return send_from_directory(app.config['static/images'], '/favicon.ico')
-    #return send_from_directory(os.path.join(app.root_path, 'static/images'), 'favicon.ico', mimetype='image/png')
+    return send_from_directory(os.path.join(app.root_path, 'static/images'), 'favicon.ico', mimetype='image/png')
