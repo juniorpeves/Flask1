@@ -1,6 +1,5 @@
 # Importando las clases de Flask
 from flask import request, make_response, redirect, render_template, session, url_for, flash
-from flask_bootstrap import bootstrap
 # from wtforms.fields.simple import SubmitField
 import unittest
 
