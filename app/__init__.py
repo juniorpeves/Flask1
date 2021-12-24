@@ -6,8 +6,6 @@ from .auth import auth
 
 def create_app():
     app = Flask(__name__)
-    PORT = 8000
-    DEBUG = False
     bootstrap = Bootstrap(app)
     
     app.config.from_object(Config)

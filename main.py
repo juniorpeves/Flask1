@@ -66,6 +66,6 @@ def hello():
 def xxx():
     return render_template('xxx.html')
 
-app.route('/favicon.ico', methods=['GET','POST'])
+@app.route('/favicon.ico', methods=['GET','POST'])
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/images'), 'favicon.ico', mimetype='image/png')
