@@ -3,6 +3,8 @@ from flask import request, make_response, redirect, render_template, session, ur
 # from wtforms.fields.simple import SubmitField
 import unittest
 
+from flask.helpers import send_from_directory
+
 from app import create_app
 from app.forms import LoginForm
 # Declarando una nueva variable instanciandola con Flask
@@ -34,7 +36,7 @@ def index():
     # response.set_cookie('user_ip', user_ip) # Guardando la ip en una cookie
     return response
 
-@app.route('/hello', methods=['GET', 'POST']) # Usando el decorador con la función route 
+@app.route('/hello', methods=['GET']) # Usando el decorador con la función route 
 def hello():
     user_ip = session.get('user_ip') # request de cookies
     login_form = LoginForm()
@@ -62,3 +64,8 @@ def hello():
 @app.route('/xxx') # Usando el decorador con la función 00route 
 def xxx():
     return render_template('xxx.html')
+
+app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.config['static'], '/favicon.ico')
+    #return send_from_directory(os.path.join(app.root_path, 'static/images'), 'favicon.ico', mimetype='image/png')
