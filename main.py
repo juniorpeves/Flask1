@@ -28,7 +28,7 @@ def not_found(error):
 def not_found(error): 
       return render_template('error_500.html', error=error)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     user_ip = request.remote_addr # request de ip
     
@@ -66,6 +66,6 @@ def hello():
 def xxx():
     return render_template('xxx.html')
 
-@app.route('/favicon.ico', methods=['GET','POST'])
+@app.route('/favicon.ico', methods=['GET'])
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/images'), 'favicon.ico', mimetype='image/png')
