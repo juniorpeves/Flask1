@@ -6,12 +6,10 @@ from .auth import auth
 
 def create_app():
     app = Flask(__name__)
-    PORT = 5000
-    DEBUG = False
     bootstrap = Bootstrap(app)
     
     app.config.from_object(Config)
     
     app.register_blueprint(auth)  
     
-    return app.run(port=PORT, debug=DEBUG)
+    return app
