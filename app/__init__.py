@@ -14,4 +14,4 @@ def create_app():
     
     app.register_blueprint(auth)  
     
-    return app
+    return app.run(port=PORT, debug=DEBUG)
