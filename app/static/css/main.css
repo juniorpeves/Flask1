@@ -7,3 +7,16 @@ html * {
     display: inline-block;
     left: 0;
 }
+nav.bg{
+    background-color: #ffed00;
+}
+a.bg{
+    background-color: white;
+    font-weight: bold;
+    color: #019d9b;
+}
+a.bg:hover{
+    background-color: #019d9b;
+    font-weight: bold;
+    color: #ffed00;
+}
