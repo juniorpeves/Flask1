@@ -1,3 +1,4 @@
+# app/__init__.py
 from flask import Flask
 from flask_bootstrap import Bootstrap
 # from flask_bootstrap4 import BE
@@ -10,6 +11,6 @@ def create_app():
     
     app.config.from_object(Config)
     
-    app.register_blueprint(auth)  
+    app.register_blueprint(auth)  # Registrando el blueprint
     
     return app
