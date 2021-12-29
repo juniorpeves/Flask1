@@ -1,22 +1,7 @@
 html * {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: sans-serif;
 }
-.img-responsive{
-    max-width: 25px;
-    position: absolute;
-    display: inline-block;
-    left: 0;
-}
-nav.bg{
-    background-color: #ffed00;
-}
-a.bg{
-    background-color: white;
-    font-weight: bold;
-    color: #019d9b;
-}
-a.bg:hover{
-    background-color: #019d9b;
-    font-weight: bold;
-    color: #ffed00;
+
+img {
+    max-width: 30px;
 }

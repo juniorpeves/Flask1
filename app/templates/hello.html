@@ -2,30 +2,25 @@
 {% import 'macros.html' as macros %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{% block title%} 
-    {{super()}} Bienvenido
-{% endblock title%}
+{% block title %}
+    {{ super() }}
+    Bienvenido
+{% endblock %}
 
-{% block content%}
+{% block content %}
     {% if username %}
-        <!-- Devolviendo el username -->
-        <h1> Welcome, {{username | capitalize}} </h1>
+        <h1>Bienvenido, {{ username | capitalize }}</h1>
     {% endif %}
 
-<!-- Agregando una estructura de control, usando el condicional if -->
     {% if user_ip %}
-        <h3> Tu IP es {{user_ip}} </h3>
+        <h3>Tu IP es {{ user_ip }}</h3>
     {% else %}
-<!--
-    *url_for* Encontrando la ruta especifica con el nombre de la funcioón *index*
--->
-    <a href="{{url_for('index')}}"> Go to index </a>
+        <a href="{{ url_for('index') }}">Ir a inicio</a>
     {% endif %}
 
-<ul>
-    {% for i in todos %}
-        {{ macros.render_todo(i)}}
-    {% endfor %}
-</ul>
-
-{% endblock content%}
+    <ul>
+        {% for todo in todos %}
+            {{ macros.render_todo(todo) }}
+        {% endfor %}
+    </ul>
+{% endblock %}
