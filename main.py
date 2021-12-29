@@ -8,6 +8,7 @@ from flask.helpers import send_from_directory
 
 from app import create_app
 from app.forms import LoginForm
+from app.firestore_service import *
 # Declarando una nueva variable instanciandola con Flask
 # Con el parametro de la aplicación
 
@@ -45,10 +46,15 @@ def hello():
     # Creando un diccionario para pasarlo como contexto de varias variables
     context = {
         'user_ip': user_ip,
-        'todos': todos,
+        'todos': get_todos(user_id=username),
         'login_form': login_form,
         'username': username # 05 Agregandolo al contexto
     }
+    
+    users=get_users()
+    for user in users:
+        print (user.id)
+        print(user.to_dict()['password']) #Convertir el documentsnapshot a un diccionario
     
     return render_template('hello.html', **context)
     # GET Se envia un diccionario expandido con el **
