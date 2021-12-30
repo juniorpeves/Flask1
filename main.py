@@ -64,7 +64,7 @@ def hello():
     return render_template('hello.html', **context)
 
 
-@app.route('/todos/delete/<todo_id>', methods=['POST'])
+@app.route('/todos/delete/<todo_id>', methods=['POST','GET'])
 def delete(todo_id):
     user_id = current_user.id
     delete_todo(user_id=user_id, todo_id=todo_id)
@@ -72,7 +72,7 @@ def delete(todo_id):
     return redirect(url_for('hello'))
 
 
-@app.route('/todos/update/<todo_id>/<int:done>', methods=['POST'])
+@app.route('/todos/update/<todo_id>/<int:done>', methods=['POST','GET'])
 def update(todo_id, done):
     user_id = current_user.id
 
