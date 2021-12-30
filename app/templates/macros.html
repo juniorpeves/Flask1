@@ -1,8 +1,11 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% macro render_todo(todo, delete_form) %}
+    <!-- Agregando la lista por todo-->
     <li class="list-group-item">
+        <!-- Estado de todo-->
         <span class="badge">{{ todo.to_dict().done }}</span>
+        <!-- Descripción de todo-->
         Descripción: {{ todo.to_dict().description }}
 
         {{ wtf.quick_form(delete_form, action=url_for('delete', todo_id=todo.id)) }}

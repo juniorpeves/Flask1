@@ -63,6 +63,14 @@ def hello():
 
 @app.route('/todos/delete/<todo_id>', methods=['POST'])
 def delete(todo_id):
+    """[Delete]
+
+    Args:
+        todo_id ([str]): [ID de todo]
+
+    Returns:
+        [return]: [Redirige a pagina hello]
+    """
     user_id = current_user.id
     delete_todo(user_id=user_id, todo_id=todo_id)
 
