@@ -1,6 +1,6 @@
 from flask import render_template, session, redirect, flash, url_for
 from flask_login import login_user, login_required, logout_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 
 from app.forms import LoginForm
 
@@ -21,20 +21,24 @@ def login():
         password = login_form.password.data
 
         user_doc = get_user(username)
-        
+
         if user_doc.to_dict() is not None:
-                
-            if check_password_hash or password (user_doc.to_dict()['password'], password):
-                user_data = UserData(username,password)
+            password_from_db = user_doc.to_dict()['password']
+
+            if password == password_from_db:
+                user_data = UserData(username, password)
                 user = UserModel(user_data)
 
                 login_user(user)
-                flash('Well come again')
+
+                flash('Bienvenido de nuevo')
+
                 redirect(url_for('hello'))
             else:
-                flash('wrong password >:(')
+                flash('La informaición no coincide')
         else:
-            flash('user does not exist =/')
+            flash('El usario no existe')
+
         return redirect(url_for('index'))
 
     return render_template('login.html', **context)

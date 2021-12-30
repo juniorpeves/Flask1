@@ -15,7 +15,8 @@ class TodoForm(FlaskForm):
 
 
 class DeleteTodoForm(FlaskForm):
-    submit = SubmitField('Completado')
+    submit = SubmitField('Borrar')
+
 
 class UpdateTodoForm(FlaskForm):
     submit = SubmitField('Actualizar')
