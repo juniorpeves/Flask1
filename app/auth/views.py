@@ -18,14 +18,14 @@ def login():
 
     if login_form.validate_on_submit():
         username = login_form.username.data
-        password = generate_password_hash(login_form.password.data)
+        password = login_form.password.data
 
         user_doc = get_user(username)
 
         if user_doc.to_dict() is not None:
             password_from_db = user_doc.to_dict()['password']
 
-            if password == password_from_db:
+            if generate_password_hash(password) == password_from_db:
                 user_data = UserData(username, password)
                 user = UserModel(user_data)
 
